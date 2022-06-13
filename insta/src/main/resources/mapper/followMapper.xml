@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.posco.insta.follow.repository.FollowMapper">
+    <select id="getFollowing" resultType="FollowDto" parameterType="FollowDto">
+        select
+            follower, following
+        from
+            follows
+        where
+            follower = #{following}
+    </select>
+    <select id="getFollower" resultType="FollowDto" parameterType="FollowDto">
+        select
+            follower, following
+        from
+            follows
+        where
+            following = #{follower}
+    </select>
+    <insert id="insertFollow" parameterType="FollowDto">
+        insert into follows(following, follower)
+        values (#{following},#{follower})
+    </insert>
+    <delete id="deleteFollow" parameterType="FollowDto">
+        delete from follows where following = #{following} and follower = #{follower}
+    </delete>
+    <select id="getFollowerByOne" resultType="FollowDto" parameterType="FollowDto">
+        select
+            follower, following
+        from
+            follows
+        where
+            following = #{following} and follower = #{follower}
+    </select>
+</mapper>
